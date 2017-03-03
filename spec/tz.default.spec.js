@@ -10,7 +10,7 @@ describe('TimezoneJS', function () {
     expect(timezoneJS.timezone.loadedZones.asia).toBe(true);
     sampleTz = timezoneJS.timezone.getTzInfo(new Date(), 'Asia/Bangkok');
     expect(sampleTz).toBeDefined();
-    expect(sampleTz.tzAbbr).toEqual('ICT');
+    expect(sampleTz.tzAbbr).toEqual('+07');
   });
 
   it('should load an unloaded zone file linked from the backward file', function () {

@@ -30,7 +30,7 @@ describe('TimezoneJS', function () {
 
       expect(i).toEqual(timezoneJS.timezone.zoneFiles.length);
       expect(sampleTz).toBeDefined();
-      expect(sampleTz.tzAbbr).toEqual('ICT');
+      expect(sampleTz.tzAbbr).toEqual('+07');
 
     });
   });

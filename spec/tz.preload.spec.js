@@ -17,7 +17,7 @@ describe('TimezoneJS', function () {
     i = 0;
     sampleTz = timezoneJS.timezone.getTzInfo(new Date(), 'Asia/Bangkok');
     expect(sampleTz).toBeDefined();
-    expect(sampleTz.tzAbbr).toEqual('ICT');
+    expect(sampleTz.tzAbbr).toEqual('+07');
     expect(new timezoneJS.Date('America/New_York').getTimezoneOffset() > 0).toBe(true);
   });
 });

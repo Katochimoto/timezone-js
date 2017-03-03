@@ -229,10 +229,10 @@
     }
     // If the last string argument doesn't parse as a Date, treat it as tz
     if (typeof args[args.length - 1] === 'string') {
-      valid = Date.parse(args[args.length - 1].replace(/GMT[\+\-]\d+/, ''));
-      if (isNaN(valid) || valid === null) {  // Checking against null is required for compatability with Datejs
-        tz = args.pop();
-      }
+      //valid = Date.parse(args[args.length - 1].replace(/GMT[\+\-]\d+/, ''));
+      //if (isNaN(valid) || valid === null) {  // Checking against null is required for compatability with Datejs
+      tz = args.pop();
+      //}
     }
     var is_dt_local = false;
     switch (args.length) {
@@ -448,8 +448,24 @@
     },
     setFromTimeProxy: function (utcMillis, tz) {
       var dt = new Date(utcMillis);
+      var tmpDt = new Date(utcMillis);
       var tzOffset = tz ? timezoneJS.timezone.getTzInfo(utcMillis, tz, true).tzOffset : dt.getTimezoneOffset();
-      dt.setTime(utcMillis + (dt.getTimezoneOffset() - tzOffset) * 60000);
+      //dt.setTime(utcMillis + (dt.getTimezoneOffset() - tzOffset) * 60000);
+
+      // Preliminary diff between browser and tzdata timezone offsets
+      var preliminaryTzOffsetCorrection = dt.getTimezoneOffset() - tzOffset;
+
+      if (preliminaryTzOffsetCorrection) {
+        tmpDt.setTime(utcMillis + preliminaryTzOffsetCorrection * 60000);
+      }
+
+      // Real diff between browser and tzdata offsets
+      var tzOffsetCorrection = tmpDt.getTimezoneOffset() - tzOffset;
+
+      if (tzOffsetCorrection !== 0) {
+        dt.setTime(utcMillis + tzOffsetCorrection * 60000);
+      }
+
       this.setFromDateObjProxy(dt);
     },
     setAttribute: function (unit, n) {

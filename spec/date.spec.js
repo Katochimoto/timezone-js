@@ -51,7 +51,7 @@ describe('timezoneJS.Date', function () {
   it('should format 2011-02-28T12:44:22.172 UTC (before daylight) to different formats and tz correctly', function () {
     var date = new timezoneJS.Date(2011,1,28,12,44,22,172,'Etc/UTC');
     expect(date.toString('MMM dd yyyy HH:mm:ss k Z', 'America/New_York')).toEqual('Feb 28 2011 07:44:22 AM EST');
-    expect(date.toString('MMM dd yyyy HH:mm:ss k Z', 'Indian/Cocos')).toEqual('Feb 28 2011 07:14:22 PM CCT');
+    expect(date.toString('MMM dd yyyy HH:mm:ss k Z', 'Indian/Cocos')).toEqual('Feb 28 2011 07:14:22 PM +0630');
   });
 
   it('should format the Unix Epoch UTC to different formats and tz correctly', function () {
@@ -436,7 +436,7 @@ describe('timezoneJS.Date', function () {
   it("handles static dst offsets in Zones like '1:00' instead of DST rule references.", function(){
     var date = new timezoneJS.Date(Date.UTC(2012, 2, 1, 0, 0, 0, 0), "Pacific/Apia");
     expect(date.getTimezoneOffset()).toBe(-840);
-    expect(date.toString("yyyy-MM-dd HH:mm:ss Z")).toBe("2012-03-01 14:00:00 WSDT");
+    expect(date.toString("yyyy-MM-dd HH:mm:ss Z")).toBe("2012-03-01 14:00:00 +14");
   });
 
   it("returns the milis value for setTime", function() {
